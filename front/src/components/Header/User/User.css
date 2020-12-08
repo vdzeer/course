@@ -1,0 +1,52 @@
+.user {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+}
+
+.user-logo {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+}
+
+.user__name {
+  display: inline-block;
+  padding-left: 10px;
+  font-size: 16px;
+  color: #fff;
+  letter-spacing: .5px;
+  font-weight: 550;
+}
+
+.user-dropdown {
+  display: none;
+  position: absolute;
+  top: 38px;
+  right: 0;
+  padding: 9px 23px 0px 23px;
+  list-style: none;
+  text-align: center;
+  background-color: #A82FFC;
+}
+
+.user-dropdown li{
+  font-size: 16px;
+  margin-bottom: 9px;
+}
+
+.user-dropdown li a{
+  font-size: 16px;
+  text-decoration: none;
+  color: #fff;
+  letter-spacing: .5px;
+}
+
+.active {
+  display: block;
+}
