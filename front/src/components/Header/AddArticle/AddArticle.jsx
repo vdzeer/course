@@ -1,8 +1,8 @@
 import './AddArticle.css';
 
-function AddArticle() {
+function AddArticle(props) {
   return (
-    <div className="article">
+    <div className="article" onClick={props.onClick}>
       <span className="article-text">Add Article</span>
     </div>
   );

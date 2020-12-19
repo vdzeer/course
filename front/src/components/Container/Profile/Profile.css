@@ -1,0 +1,41 @@
+.main {
+  text-align: center;
+}
+
+.main__title {
+  font-size: 20px;
+}
+
+.profile-edit-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: auto;
+  max-width: 400px;
+}
+
+.profile-edit__input {
+  margin-bottom: 7px;
+  padding: 5px 10px;
+  font-size: 16px;
+}
+
+.profile-edit-form button {
+  padding: 5px 10px;
+  font-size: 16px;
+  background-color: #A82FFC;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  letter-spacing: .5px;
+  cursor: pointer;
+  transition: .1s;
+  -webkit-transition: .1s;
+  -moz-transition: .1s;
+  -ms-transition: .1s;
+  -o-transition: .1s;
+}
+
+.profile-edit-form button:hover {
+  background-color: #9e56d1;
+}
