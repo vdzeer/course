@@ -1,5 +1,6 @@
 const express = require('express');
 const cfg = require('./config');
+const PORT = cfg.getValue('PORT', 3000);
 const app = express();
 
 app.get('/', (req, res) => res.send('Hello World!'));
@@ -13,4 +14,4 @@ app.use((err, req, res, next) => {
   res.status(500).send('500: Internal Server Error');
 });
 
-app.listen(cfg.PORT, () => console.log(`Listening on port ${cfg.PORT}!`));
+app.listen(PORT, () => console.log(`Listening on port ${PORT}!`));
