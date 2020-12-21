@@ -15,7 +15,7 @@ function Header({setHandler, username, setUsername}) {
     <div className="header">
       <Logo onClick={logoClick}/>
       <AddArticleBtn onClick={addArticleClick}/>
-      <User onClick={profileClick} username={username}/>
+      <User profileClick={profileClick} username={username}/>
     </div>
   );
 }

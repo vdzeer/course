@@ -1,7 +1,7 @@
 import './User.css';
 import userPhoto from './user-logo.jpg'
 
-function User({username, onClick}) {
+function User({username, profileClick}) {
   const profileHandler = () => {
     const userBlock = document.querySelector('.user');
     const dropdown = document.querySelector('.user-dropdown');
@@ -21,7 +21,7 @@ function User({username, onClick}) {
       <img src={userPhoto} alt="Logo" className="user-logo"/>
       <span className="user__name">{username.name} {username.surname}</span>
       <ul className="user-dropdown">
-        <li onClick={onClick} className="user-dropdown-profile"><span>Profile</span></li>
+        <li onClick={profileClick} className="user-dropdown-profile"><span>Profile</span></li>
         <li><span>Logout</span></li>
       </ul>
     </div>
