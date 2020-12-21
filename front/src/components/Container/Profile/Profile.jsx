@@ -1,10 +1,9 @@
 import './Profile.css';
 
-function Profile(props) {
+function Profile({setUsername}) {
   const submitForm = (e) => {
     e.preventDefault();
-    const data = [...document.querySelectorAll('.profile-edit__input')];
-    props.setUsername({'name': data[0].value, 'surname': data[1].value});
+    setUsername({'name': e.target[0].value, 'surname': e.target[1].value});
   }
 
   return (
@@ -12,8 +11,8 @@ function Profile(props) {
       <h2 className="main__title">Profile</h2>
       <div className="profile-edit">
         <form className="profile-edit-form" onSubmit={submitForm}>
-          <input type="text" className="profile-edit__input" placeholder="Name" required/>
-          <input type="text" className="profile-edit__input" placeholder="Surname" required/>
+          <input type="text" className="profile-edit__input" placeholder="Name" name="input_name" required/>
+          <input type="text" className="profile-edit__input" placeholder="Surname" name="input_surname" required/>
           <button type="submit">Change data!</button>
         </form>
       </div>

@@ -1,8 +1,8 @@
 import './Logo.css';
 
-function Logo(props) {
+function Logo({onClick}) {
   return (
-    <div className="logo" onClick={props.onClick}>
+    <div className="logo" onClick={onClick}>
       <span className="logo-text">Together</span>
     </div>
   );

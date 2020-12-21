@@ -1,22 +1,18 @@
 import Container from '../components/Container/Container';
 import Header from '../components/Header/Header';
 import React, {useState} from 'react';
+import Articles from '../components/Container/Articles/Articles';
 
 function ContainerContainer() {
-  // Handlers:
-  const [handlers, setHandlers] = useState({'logo': true, 'addBtn': false, 'profile': false});
-
-  const logoHandler = () => setHandlers({'logo': true, 'addBtn': false, 'profile': false});
-  const addBtnHandler = () => setHandlers({'logo': false, 'addBtn': true, 'profile': false});
-  const profileHandler = () => setHandlers({'logo': false, 'addBtn': false, 'profile': true});
-
   // Username:
-  const [username, setUsername] = useState({'name': 'Ivan', 'surname': 'Ivanov'});
+  const [username, setUsername] = useState({'name': '', 'surname': ''});
+  // Handler state:
+  const [handlerState, setHandler] = useState(<Articles />);
 
   return (
     <> 
-      <Header logoHandler={logoHandler} addBtnHandler={addBtnHandler} profileHandler={profileHandler} username={username}/>
-      <Container logo={handlers.logo} addBtn={handlers.addBtn} profile={handlers.profile} setUsername={setUsername}/>
+      <Header setHandler={setHandler} username={username} setUsername={setUsername}/>
+      <Container handlerState={handlerState}/>
     </>
   );
 }
