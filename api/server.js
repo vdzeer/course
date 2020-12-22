@@ -2,9 +2,9 @@ const express = require('express');
 const cfg = require('./config');
 const PORT = cfg.getValue('PORT', 3000);
 const app = express();
+const postsRouter = require('./routes/posts.router');
 
-app.get('/', (req, res) => res.send('Hello World!'));
-app.get('/user/:name', (req, res) => res.send(`Hello, dear ${(req.params.name)[0].toUpperCase() + (req.params.name).slice(1)}!`));
+app.use('/posts', postsRouter);
 
 app.use((req, res) => {
   res.status(404).send('404: Page Not Found');
