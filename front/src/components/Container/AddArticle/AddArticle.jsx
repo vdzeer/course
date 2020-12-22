@@ -2,8 +2,8 @@ import './AddArticle.css';
 
 function AddArticle() {
   return (
-    <div className="article">
-      <span className="article-text">Add Article</span>
+    <div className="main">
+      <h2 className="main__title">Add article</h2>
     </div>
   );
 }

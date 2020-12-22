@@ -1,10 +1,9 @@
 import './Container.css';
 
-
-function Container() {
+function Container({handlerState}) {
   return (
     <div className="container">
-      
+      {handlerState}
     </div>
   );
 }
