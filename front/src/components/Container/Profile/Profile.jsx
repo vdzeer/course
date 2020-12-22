@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import './Profile.css';
 
 function Profile({setUsername}) {
@@ -18,6 +19,10 @@ function Profile({setUsername}) {
       </div>
     </div>
   );
+}
+
+Profile.propTypes = {
+  setUsername: PropTypes.func.isRequired
 }
 
 export default Profile;

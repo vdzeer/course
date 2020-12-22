@@ -1,5 +1,7 @@
+import PropTypes from 'prop-types';
 import './User.css';
-import userPhoto from './user-logo.jpg'
+import userPhoto from './user-logo.jpg';
+
 
 function User({username, profileClick}) {
   const profileHandler = () => {
@@ -26,6 +28,16 @@ function User({username, profileClick}) {
       </ul>
     </div>
   );
+}
+
+const usernameType = PropTypes.shape({
+  name: PropTypes.string.isRequired,
+  surname: PropTypes.string.isRequired
+});
+
+User.propTypes = {
+  username: usernameType,
+  profileClick: PropTypes.func.isRequired
 }
 
 export default User;
