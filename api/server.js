@@ -1,9 +1,13 @@
+require('dotenv').config();
+
 const express = require('express');
-const cfg = require('./config');
-const PORT = cfg.getValue('PORT', 3000);
-const app = express();
+const PORT = process.env.PORT || 3000;
+
 const postsRouter = require('./routes/posts.router');
 
+const app = express();
+
+app.use(express.json());
 app.use('/posts', postsRouter);
 
 app.use((req, res) => {
@@ -13,5 +17,6 @@ app.use((req, res) => {
 app.use((err, req, res, next) => {
   res.status(500).send('500: Internal Server Error');
 });
+
 
 app.listen(PORT, () => console.log(`Listening on port ${PORT}!`));
