@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import './Header.css';
 import Logo from './Logo/Logo';
 import AddArticleBtn from './AddArticleBtn/AddArticleBtn';
@@ -18,6 +20,17 @@ function Header({setHandler, username, setUsername}) {
       <User profileClick={profileClick} username={username}/>
     </div>
   );
+}
+
+const usernameType = PropTypes.shape({
+  name: PropTypes.string.isRequired,
+  surname: PropTypes.string.isRequired
+});
+
+Header.propTypes = {
+  setHandler: PropTypes.func.isRequired,
+  username: usernameType,
+  setUsername: PropTypes.func.isRequired,
 }
 
 export default Header;
