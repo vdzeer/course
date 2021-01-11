@@ -1,14 +1,16 @@
-require('dotenv').config();
-
 const express = require('express');
-const PORT = process.env.PORT || 3000;
+const cfg = require('./config');
+const PORT = cfg.getValue('PORT', 3000);
 const DI = require('./DI');
 
 const app = express();
 app.use(express.json());
 
 for (const name in DI.routes) {
-  app.use(`/${name}`, DI.routes[name](DI.controllers[name]));
+  if (!DI.controllers[name]) 
+    console.error(`Controller with name ${name} didn\`t find!`);
+  else 
+    app.use(`/${name}`, DI.routes[name](DI.controllers[name]));
 }
 
 app.use((req, res) => {
