@@ -1,4 +1,5 @@
 const bcrypt = require('bcryptjs');
+const cryptoJS = require('crypto-js');
 const jwt = require('jsonwebtoken');
 const cfg = require('../services/config');
 const User = require('../models/user');
@@ -31,14 +32,14 @@ class AuthController {
     const hashPswd = bcrypt.hashSync(password, 5);
     await User.saveUser(login, hashPswd);
 
-
+    const codedID = cryptoJS.AES.encrypt(login, cfg.getValue('secret')).toString();
     const message = {
       to: login,
       subject: 'Congratulations! You are successfully registered!',
       html: `
       <h2>You are successfully registered! </h2>
       <span>Please, confirm this email:</span>
-      <a href="http://localhost:3000/auth/check/${login}">click</a>
+      <a href="http://localhost:3000/auth/check/${codedID}">click</a>
       `
     }
 
@@ -70,7 +71,9 @@ class AuthController {
   }
 
   async check(req, res) {
-    const login = req.params.email;
+    const bytes = cryptoJS.AES.decrypt(req.params[0], cfg.getValue('secret'));
+    const login = bytes.toString(cryptoJS.enc.Utf8);
+
     const userList = await User.findByName(login);
 
     if (!userList.rowCount) {
@@ -80,7 +83,7 @@ class AuthController {
     const user = userList.rows[0];
 
     if (user.isverify) {
-      return res.status(400).send(`This account is verified!`);
+      return res.status(400).send('This account is already verified!');
     }
 
     await User.verify(user.id);
