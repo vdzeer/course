@@ -1,5 +1,5 @@
 const express = require('express');
-const cfg = require('./config');
+const cfg = require('./services/config');
 const PORT = cfg.getValue('PORT', 3000);
 const DI = require('./DI');
 
