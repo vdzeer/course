@@ -8,7 +8,8 @@ module.exports = function (req, res, next) {
       return res.status(400).send('User is not logged in!');
     }
     const decodedData = jwt.verify(token, cfg.getValue('secret'));
-    req.user = decodedData;
+    console.log(decodedData);
+    req.user = decodedData.id;
 
     next();
   } catch (e) {

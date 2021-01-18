@@ -6,8 +6,8 @@ const User = require('../models/user');
 const mailer = require('../services/nodemailer');
 
 
-const createToken = id => {
-  const payload = {id};
+const createToken = (...data) => {
+  const payload = {...data};
   return jwt.sign(payload, cfg.getValue('secret'), {expiresIn: '24h'});
 }
 
@@ -39,7 +39,7 @@ class AuthController {
       html: `
       <h2>You are successfully registered! </h2>
       <span>Please, confirm this email:</span>
-      <a href="http://localhost:3000/auth/check/${codedID}">click</a>
+      <a href="${cfg.getValue('checkLink') + codedID}">click</a>
       `
     }
 

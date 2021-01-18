@@ -1,4 +1,5 @@
 const nodemailer = require('nodemailer');
+const cfg = require('./config');
 
 const transporter = nodemailer.createTransport(
   {
@@ -6,12 +7,12 @@ const transporter = nodemailer.createTransport(
     post: '587',
     secure: false,
     auth: {
-      user: 'robinson2ryan2@gmail.com',
-      pass: 'Qwerty123456$'
+      user: cfg.getValue('mailUser'),
+      pass: cfg.getValue('mailPass')
     }
   },
   {
-    from: 'Together Bot <robinson2ryan2@gmail.com>'
+    from: `Together Bot <${cfg.getValue('mailUser')}>`
   }
 );
 
