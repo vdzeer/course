@@ -1,0 +1,31 @@
+.article {
+  padding: 20px 40px 30px 40px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  margin: auto;
+  border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+  margin-bottom: 70px;
+}
+
+.article:first-child {
+  margin-top: 10px;
+}
+
+.article:last-child {
+  margin-bottom: 0;
+}
+
+.article__title {
+  margin: 0;
+  padding: 0;
+  margin-bottom: 20px;
+  font-size: 18px;
+  letter-spacing: 1px;
+}
+
+.article__text {
+  font-size: 16px;
+}

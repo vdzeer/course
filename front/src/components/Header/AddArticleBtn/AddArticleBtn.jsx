@@ -2,8 +2,8 @@ import './AddArticleBtn.css';
 
 function AddArticleBtn() {
   return (
-    <div className="article">
-      <span className="article-text">Add Article</span>
+    <div className="addArticle">
+      <span className="addArticle-text">Add Article</span>
     </div>
   );
 }

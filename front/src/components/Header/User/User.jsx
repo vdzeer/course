@@ -26,7 +26,9 @@ function User({username}) {
         <Link to='/profile' style={{ textDecoration: 'none' }}>
           <li className="user-dropdown-profile"><span>Profile</span></li>
         </Link>
-        <li><span>Logout</span></li>
+        <Link to='/login' style={{ textDecoration: 'none' }}>
+          <li><span>Logout</span></li>
+        </Link>
       </ul>
     </div>
   );
