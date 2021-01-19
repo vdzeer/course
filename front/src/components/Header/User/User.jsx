@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import './User.css';
 import userPhoto from './user-logo.jpg';
+import {Link} from 'react-router-dom';
 
-
-function User({username, profileClick}) {
+function User({username}) {
   const profileHandler = () => {
     const userBlock = document.querySelector('.user');
     const dropdown = document.querySelector('.user-dropdown');
@@ -23,21 +23,20 @@ function User({username, profileClick}) {
       <img src={userPhoto} alt="Logo" className="user-logo"/>
       <span className="user__name">{username.name} {username.surname}</span>
       <ul className="user-dropdown">
-        <li onClick={profileClick} className="user-dropdown-profile"><span>Profile</span></li>
+        <Link to='/profile' style={{ textDecoration: 'none' }}>
+          <li className="user-dropdown-profile"><span>Profile</span></li>
+        </Link>
         <li><span>Logout</span></li>
       </ul>
     </div>
   );
 }
 
-const usernameType = PropTypes.shape({
-  name: PropTypes.string.isRequired,
-  surname: PropTypes.string.isRequired
-});
-
 User.propTypes = {
-  username: usernameType,
-  profileClick: PropTypes.func.isRequired
+  username: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    surname: PropTypes.string.isRequired
+  })
 }
 
 export default User;
