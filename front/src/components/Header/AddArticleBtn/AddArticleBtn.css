@@ -1,4 +1,4 @@
-.article {
+.addArticle {
   padding: 7px 17px;
   background-color: #fff;
   border-radius: 8px;
@@ -11,7 +11,7 @@
   user-select: none;
 }
 
-.article-text {
+.addArticle-text {
   font-size: 16px;
   color: #7A08FA;
   font-weight: 550;

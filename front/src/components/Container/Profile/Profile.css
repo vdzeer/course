@@ -1,9 +1,6 @@
-.main {
-  text-align: center;
-}
-
 .main__title {
   font-size: 20px;
+  text-align: center;
 }
 
 .profile-edit-form {

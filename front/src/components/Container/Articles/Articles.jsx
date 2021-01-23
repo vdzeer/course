@@ -1,9 +1,19 @@
+import Article from './Article/Article';
+import {Link} from 'react-router-dom';
 import './Articles.css';
 
-function Articles() {
+function Articles({posts}) {
   return (
     <div className="main">
-      <h2 className="main__title">Articles</h2>
+      {posts.map((el, index) =>
+        <Link 
+          to={'/article/' + el.title} 
+          className="article-block"
+          key={index}
+        >
+          <Article title={el.title} text={el.text}/>
+        </Link>
+      )}
     </div>
   );
 }

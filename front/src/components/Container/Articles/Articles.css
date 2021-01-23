@@ -1,7 +1,23 @@
-.main {
-  text-align: center;
+.article-block {
+  display: block;
+  /* padding: 20px 40px 30px 40px; */
+  /* box-shadow: 0 0 10px rgba(0,0,0,0.5); */
+  width: 40%;
+  margin: auto;
+  border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+  margin-bottom: 40px;
+  text-decoration: none;
+  color: #000;
 }
 
-.main__title {
-  font-size: 20px;
+.article-block:first-child {
+  margin-top: 10px;
+}
+
+.article-block:last-child {
+  margin-bottom: 0;
 }
