@@ -22,7 +22,7 @@ function Container({setUsername}) {
       text: 'Some text from third'
     }
   ];
-  const file = "(\\d+)-[a-zA-Z]{1, 10}-2020-01-20.(docx|jpeg|pdf|txt)/v.[0-9].[0-9].[0-9]";
+
   return (
     <div className="container">
       <Switch>
@@ -39,12 +39,6 @@ function Container({setUsername}) {
         <Route exact path="/profile"> 
           <Profile setUsername={setUsername} />
         </Route>
-        {/* For additional task */}
-        <Route  
-          path={`/users/:id(\\d+)?/(edit|(avatar/(edit|delete)?)|(file/${file}))?`}
-          render={props => 
-            console.log(props)}
-          />
         <Redirect to='/' />
       </Switch>
     </div>
