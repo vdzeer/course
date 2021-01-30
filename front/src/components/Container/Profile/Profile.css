@@ -20,17 +20,17 @@
 .profile-edit-form button {
   padding: 5px 10px;
   font-size: 16px;
-  background-color: #A82FFC;
+  background-color: #a82ffc;
   color: #fff;
   border: none;
   border-radius: 8px;
-  letter-spacing: .5px;
+  letter-spacing: 0.5px;
   cursor: pointer;
-  transition: .1s;
-  -webkit-transition: .1s;
-  -moz-transition: .1s;
-  -ms-transition: .1s;
-  -o-transition: .1s;
+  transition: 0.1s;
+  -webkit-transition: 0.1s;
+  -moz-transition: 0.1s;
+  -ms-transition: 0.1s;
+  -o-transition: 0.1s;
 }
 
 .profile-edit-form button:hover {

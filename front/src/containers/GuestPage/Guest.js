@@ -1,15 +1,14 @@
-import Sign from '../../components/GuestPage/Sign';
-import Header from './GuestHeader/Header';
-import React from 'react';
-
+import Sign from '../../components/GuestPage/Sign'
+import Header from './GuestHeader/Header'
+import React from 'react'
 
 function MainContainer() {
   return (
     <>
-      <Header/>
+      <Header />
       <Sign />
     </>
-  );
+  )
 }
 
-export default MainContainer;
+export default MainContainer

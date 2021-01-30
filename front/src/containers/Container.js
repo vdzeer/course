@@ -1,18 +1,17 @@
-import Container from '../components/Container/Container';
-import Header from './Header/Header';
-import React, {useState} from 'react';
-
+import Container from '../components/Container/Container'
+import Header from './Header/Header'
+import React, { useState } from 'react'
 
 function MainContainer() {
   // Username:
-  const [username, setUsername] = useState({'name': 'No', 'surname': 'Name'});
+  const [username, setUsername] = useState({ name: 'No', surname: 'Name' })
 
   return (
     <>
       <Header username={username} />
-      <Container setUsername={setUsername} /> 
+      <Container setUsername={setUsername} />
     </>
-  );
+  )
 }
 
-export default MainContainer;
+export default MainContainer

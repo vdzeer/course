@@ -1,11 +1,11 @@
-import './AddArticleBtn.css';
+import './AddArticleBtn.css'
 
 function AddArticleBtn() {
   return (
-    <div className="addArticle">
-      <span className="addArticle-text">Add Article</span>
+    <div className='addArticle'>
+      <span className='addArticle-text'>Add Article</span>
     </div>
-  );
+  )
 }
 
-export default AddArticleBtn;
+export default AddArticleBtn

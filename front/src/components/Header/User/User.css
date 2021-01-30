@@ -20,7 +20,7 @@
   padding-left: 10px;
   font-size: 16px;
   color: #fff;
-  letter-spacing: .5px;
+  letter-spacing: 0.5px;
   font-weight: 550;
 }
 
@@ -32,19 +32,19 @@
   padding: 9px 23px 0px 23px;
   list-style: none;
   text-align: center;
-  background-color: #A82FFC;
+  background-color: #a82ffc;
 }
 
-.user-dropdown li{
+.user-dropdown li {
   font-size: 16px;
   margin-bottom: 9px;
 }
 
-.user-dropdown li span{
+.user-dropdown li span {
   font-size: 16px;
   text-decoration: none;
   color: #fff;
-  letter-spacing: .5px;
+  letter-spacing: 0.5px;
 }
 
 .active {
