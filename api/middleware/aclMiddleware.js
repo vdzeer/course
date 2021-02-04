@@ -1,41 +1,30 @@
 const User = require('../models/user')
+const permissions = require('../models/permissions')
 
-module.exports = function (model, column) {
+module.exports = function ([...data]) {
   return async function (req, res, next) {
-    const userID = req.user
-    const entity = await model.findByID(req.params.id)
+    const [admin, user] = data,
+      userID = req.user,
+      model = user.own.model,
+      column = user.own.column
 
+    const entity = await model.findByID(req.params.id)
     if (!entity) {
       return res.status(404).send(`This does not exist!`)
     }
 
-    const entity_column = entity.rows[0][column]
     const role = await User.getRole(userID)
-    let userPermissions
+    const userPermissions = permissions[role] || []
 
-    if (role === 'admin') {
-      userPermissions = [
-        'updateAnyPost',
-        'deleteAnyPost',
-        'updateOwnPost',
-        'deleteOwnPost',
-      ]
-    } else if (role === 'user') {
-      userPermissions = ['updateOwnPost', 'deleteOwnPost']
-    }
-
-    if (
-      userPermissions.includes('updateAnyPost') &&
-      userPermissions.includes('deleteAnyPost')
-    ) {
+    if (userPermissions.some((el) => el === admin.permission)) {
       console.log('Welcome, admin!')
       next()
     }
 
+    const entity_column = entity.rows[0][column]
     if (
       entity_column == userID &&
-      userPermissions.includes('updateOwnPost') &&
-      userPermissions.includes('deleteOwnPost')
+      userPermissions.some((el) => el === user.permission)
     ) {
       next()
     } else {

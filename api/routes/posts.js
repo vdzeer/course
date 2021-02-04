@@ -10,12 +10,18 @@ module.exports = (controller) => {
   router.post('/', [checkAuth, controller.createPost])
   router.put('/:id', [
     checkAuth,
-    aclMiddleware(Post, 'user_id'),
+    aclMiddleware([
+      { permision: 'updateAnyPost' },
+      { permission: 'updateOwnPost', own: { model: Post, column: 'user_id' } },
+    ]),
     controller.updatePost,
   ])
   router.delete('/:id', [
     checkAuth,
-    aclMiddleware(Post, 'user_id'),
+    aclMiddleware([
+      { permision: 'deleteAnyPost' },
+      { permission: 'deleteOwnPost', own: { model: Post, column: 'user_id' } },
+    ]),
     controller.deletePost,
   ])
 
