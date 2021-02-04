@@ -15,12 +15,12 @@ module.exports = function (rules) {
         const entity_column = entity.rows[0][rule.own.column]
         if (
           entity_column == userID &&
-          userPermissions.some((el) => el === rule.permission)
+          userPermissions.includes(rule.permission)
         ) {
           authorized = true
         }
       } else {
-        if (userPermissions.some((el) => el === rule.permission)) {
+        if (userPermissions.includes(rule.permission)) {
           console.log('Welcome, admin!')
           authorized = true
         }
