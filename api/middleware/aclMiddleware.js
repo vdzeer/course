@@ -1,6 +1,6 @@
 const User = require('../models/user')
 
-module.exports = function (model, column, usersPermissions) {
+module.exports = function (model, column) {
   return async function (req, res, next) {
     const userID = req.user
     const entity = await model.findByID(req.params.id)
@@ -10,12 +10,20 @@ module.exports = function (model, column, usersPermissions) {
     }
 
     const entity_column = entity.rows[0][column]
-    // const role = await User.getRole(userID)
+    const role = await User.getRole(userID)
+    let userPermissions
 
-    const userPermissions = usersPermissions.filter((el) => el.id == userID)[0]
-      .permissions
+    if (role === 'admin') {
+      userPermissions = [
+        'updateAnyPost',
+        'deleteAnyPost',
+        'updateOwnPost',
+        'deleteOwnPost',
+      ]
+    } else if (role === 'user') {
+      userPermissions = ['updateOwnPost', 'deleteOwnPost']
+    }
 
-    console.log()
     if (
       userPermissions.includes('updateAnyPost') &&
       userPermissions.includes('deleteAnyPost')
