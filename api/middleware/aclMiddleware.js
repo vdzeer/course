@@ -12,7 +12,7 @@ module.exports = function (rules) {
     for await (const rule of rules) {
       if (rule.own) {
         const entity = await rule.own.model.findByID(req.params.id)
-        const entity_column = entity.rows[0][column]
+        const entity_column = entity.rows[0][rule.own.column]
         if (
           entity_column == userID &&
           userPermissions.some((el) => el === rule.permission)
