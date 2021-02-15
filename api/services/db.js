@@ -1,6 +1,6 @@
-require('dotenv').config();
-const cfg = require('./config');
-const Pool = require('pg').Pool;
+require('dotenv').config()
+const cfg = require('./config')
+const Pool = require('pg').Pool
 
 const pool = new Pool({
   user: cfg.getValue('user', 'postgres'),
@@ -8,6 +8,6 @@ const pool = new Pool({
   host: cfg.getValue('host', 'localhost'),
   port: cfg.getValue('port', '5432'),
   database: cfg.getValue('database', 'course'),
-});
+})
 
-module.exports = pool;
+module.exports = pool
