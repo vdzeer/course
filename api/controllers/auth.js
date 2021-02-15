@@ -1,6 +1,7 @@
 const bcrypt = require('bcryptjs')
 const cryptoJS = require('crypto-js')
 const jwt = require('jsonwebtoken')
+const { OAuth2Client } = require('google-auth-library')
 const cfg = require('../services/config')
 const User = require('../models/user')
 const mailer = require('../services/nodemailer')
@@ -9,6 +10,10 @@ const createToken = (...data) => {
   const payload = { ...data }
   return jwt.sign(payload, cfg.getValue('secret'), { expiresIn: '24h' })
 }
+
+const client = new OAuth2Client(
+  '392424671686-scb4q7rli42r1slmvrv0bp1ufhp3cch4.apps.googleusercontent.com'
+)
 
 class AuthController {
   async register(req, res) {
@@ -92,6 +97,22 @@ class AuthController {
 
     await User.verify(user.id)
     res.send('You have successfully verified your account!')
+  }
+
+  async googlelogin(req, res) {
+    const { tokenId } = req.body
+
+    client
+      .verifyIdToken({
+        idToken: tokenId,
+        audience:
+          '392424671686-scb4q7rli42r1slmvrv0bp1ufhp3cch4.apps.googleusercontent.com',
+      })
+      .then((res) => {
+        const { email_verified, name, email } = res.payload
+        // if ()
+        console.log(res.payload)
+      })
   }
 }
 
