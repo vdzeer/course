@@ -1,6 +1,8 @@
 const bcrypt = require('bcryptjs')
 const cryptoJS = require('crypto-js')
 const jwt = require('jsonwebtoken')
+const { OAuth2Client } = require('google-auth-library')
+const fetch = require('node-fetch')
 const cfg = require('../services/config')
 const User = require('../models/user')
 const mailer = require('../services/nodemailer')
@@ -9,6 +11,10 @@ const createToken = (...data) => {
   const payload = { ...data }
   return jwt.sign(payload, cfg.getValue('secret'), { expiresIn: '24h' })
 }
+
+const client = new OAuth2Client(
+  '392424671686-scb4q7rli42r1slmvrv0bp1ufhp3cch4.apps.googleusercontent.com'
+)
 
 class AuthController {
   async register(req, res) {
@@ -29,7 +35,7 @@ class AuthController {
     }
 
     const hashPswd = bcrypt.hashSync(password, 5)
-    await User.saveUser(login, hashPswd)
+    await User.saveUser(login, hashPswd, false)
 
     const codedID = cryptoJS.AES.encrypt(
       login,
@@ -92,6 +98,58 @@ class AuthController {
 
     await User.verify(user.id)
     res.send('You have successfully verified your account!')
+  }
+
+  async googlelogin(req, res) {
+    const { tokenId } = req.body
+    const response = await client.verifyIdToken({
+      idToken: tokenId,
+      audience:
+        '392424671686-scb4q7rli42r1slmvrv0bp1ufhp3cch4.apps.googleusercontent.com',
+    })
+
+    const { email_verified, email } = response.payload
+    if (email_verified) {
+      const user = await User.findByName(email)
+
+      if (user.rowCount) {
+        const token = createToken(user.rows[0].id)
+        res.send(`Your token: ${token}`)
+      } else {
+        const hashPswd = bcrypt.hashSync(tokenId, 5)
+        await User.saveUser(login, hashPswd, true)
+
+        const newUser = await User.findByName(email)
+        const token = createToken(newUser.rows[0].id)
+        res.send(`Your token: ${token}`)
+      }
+    }
+  }
+
+  async facebooklogin(req, res) {
+    const { accessToken, userID } = req.body
+
+    let urlGraphFB = `https://graph.facebook.com/v2.11/${userID}/?fields=id,email&access_token=${accessToken}`
+
+    const response = await fetch(urlGraphFB, {
+      method: 'GET',
+    }).then((resp) => resp.json())
+
+    const { email } = response
+
+    const user = await User.findByName(email)
+
+    if (user.rowCount) {
+      const token = createToken(user.rows[0].id)
+      res.send(`Your token: ${token}`)
+    } else {
+      const hashPswd = bcrypt.hashSync(tokenId, 5)
+      await User.saveUser(login, hashPswd, true)
+
+      const newUser = await User.findByName(email)
+      const token = createToken(newUser.rows[0].id)
+      res.send(`Your token: ${token}`)
+    }
   }
 }
 

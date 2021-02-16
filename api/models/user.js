@@ -4,10 +4,10 @@ class User {
     return await db.query(`SELECT * FROM users where login = $1`, [login])
   }
 
-  static async saveUser(login, password) {
+  static async saveUser(login, password, isVerify) {
     const user = await db.query(
-      `INSERT INTO users (login, password, isVerify, role) values ($1, $2, false, 'user') RETURNING *`,
-      [login, password]
+      `INSERT INTO users (login, password, isVerify, role) values ($1, $2, $3, 'user') RETURNING *`,
+      [login, password, isVerify]
     )
     return user
   }
