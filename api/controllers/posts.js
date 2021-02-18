@@ -9,7 +9,7 @@ class PostController {
   async getPostByID(req, res) {
     const id = req.params.id
     const post = await db.query(`SELECT * FROM post where id = $1`, [id])
-    res.json(post.rows)
+    res.json(post.rows[0])
   }
 
   async createPost(req, res) {
