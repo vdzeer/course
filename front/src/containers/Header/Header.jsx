@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types'
-
 import './Header.css'
 import Logo from '../../components/Header/Logo/Logo'
 import AddArticleBtn from '../../components/Header/AddArticleBtn/AddArticleBtn'
@@ -11,7 +10,7 @@ function Header({ username }) {
       <Link to='/' style={{ textDecoration: 'none' }}>
         <Logo />
       </Link>
-      <Link to='/addArticle' style={{ textDecoration: 'none' }}>
+      <Link to='/editArticle' style={{ textDecoration: 'none' }}>
         <AddArticleBtn />
       </Link>
       <User username={username} />

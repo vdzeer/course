@@ -1,19 +1,18 @@
 import { Redirect } from 'react-router-dom'
-import { useState, useEffect } from 'react'
-import axios from 'axios'
-import Article from '../Container/Articles/Article/Article'
+import { useQuery } from 'react-query'
+import { getOnePost } from '../../containers/Posts/hooks/postReq'
 
 function ArticlePage({ routes }) {
-  const [post, setPost] = useState({})
-  useEffect(() => {
-    axios
-      .get(`http://localhost:5000/posts/${routes.match.params.id}`)
-      .then((res) => setPost(res.data))
-  }, [])
+  const postId = routes.match.params.id
+  const { data: response } = useQuery('posts', () => getOnePost({ postId }))
+  const post = response?.data || null
 
   return post ? (
     <div className='article-block'>
-      <Article title={post.title} text={post.content} />
+      <div className='article'>
+        <h2 className='article__title'>{post.title}</h2>
+        <span className='article__text'>{post.content}</span>
+      </div>
     </div>
   ) : (
     <Redirect to='/' />
