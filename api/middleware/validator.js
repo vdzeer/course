@@ -50,7 +50,10 @@ module.exports = function validator(data) {
               req.body[field],
             ])
             if (fld.rowCount) {
-              return res.status(400).send(`Field '${field}' is already exist!`)
+              if (!(params[3] && req.params.id === fld.rows[0].id))
+                return res
+                  .status(400)
+                  .send(`Field '${field}' is already exist!`)
             }
             break
         }
