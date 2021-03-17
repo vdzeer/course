@@ -3,8 +3,8 @@ import EditArticle from '../../components/Container/EditArticle/EditArticle'
 import { getOnePost, createPost, updatePost } from './hooks/postReq'
 import { useQuery, useMutation } from 'react-query'
 
-function PostAction({ routes }) {
-  const postId = routes.match.params.id
+function PostAction({ postId, isOpen, handleClose }) {
+  console.log(postId)
   const { data: response } = useQuery('posts', () => getOnePost({ postId }))
   const post = response?.data || { title: '', content: '', access: 'All' }
 
@@ -33,10 +33,14 @@ function PostAction({ routes }) {
     [editPost]
   )
 
-  return post.id ? (
-    <EditArticle post={post} onSubmit={onSubmitEdit} edit={true} />
-  ) : (
-    <EditArticle post={post} onSubmit={onSubmitAdd} edit={false} />
+  return (
+    <EditArticle
+      post={post}
+      onSubmit={!!postId ? onSubmitEdit : onSubmitAdd}
+      edit={!!postId}
+      isOpen={isOpen}
+      handleClose={handleClose}
+    />
   )
 }
 
