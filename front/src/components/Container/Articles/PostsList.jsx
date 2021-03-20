@@ -6,12 +6,13 @@ function PostsList({ posts, isFetching }) {
   return (
     <div className='main'>
       {isFetching && <span>Loading...</span>}
-      {!isFetching &&
-        posts.map((el, index) => (
-          <Link to={'/article/' + el.id} className='article-block' key={index}>
+      {!isFetching && (
+        <div className='article-block'>
+          {posts.map((el, index) => (
             <Article id={el.id} title={el.title} text={el.content} />
-          </Link>
-        ))}
+          ))}
+        </div>
+      )}
     </div>
   )
 }

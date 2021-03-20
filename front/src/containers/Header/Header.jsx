@@ -10,9 +10,7 @@ function Header({ username }) {
       <Link to='/' style={{ textDecoration: 'none' }}>
         <Logo />
       </Link>
-      <Link to='/editArticle' style={{ textDecoration: 'none' }}>
-        <AddArticleBtn />
-      </Link>
+      <AddArticleBtn />
       <User username={username} />
     </div>
   )

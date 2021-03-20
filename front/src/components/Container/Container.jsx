@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types'
 import './Container.css'
 import { Switch, Route, Redirect } from 'react-router-dom'
-import PostAction from '../../containers/Posts/PostAction'
 import Profile from './Profile/Profile'
 import ArticlePage from '../ArticlePage/ArticlePage'
 import PostsListContainer from '../../containers/Posts/PostsList'
@@ -17,11 +16,6 @@ function Container({ setUsername }) {
           exact
           path='/article/:id'
           render={(props) => <ArticlePage routes={props} />}
-        />
-        <Route
-          exact
-          path='/editArticle/:id?'
-          render={(props) => <PostAction routes={props} />}
         />
         <Route exact path='/profile'>
           <Profile setUsername={setUsername} />
