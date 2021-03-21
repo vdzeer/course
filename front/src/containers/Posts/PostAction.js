@@ -4,7 +4,6 @@ import { getOnePost, createPost, updatePost } from './hooks/postReq'
 import { useQuery, useMutation } from 'react-query'
 
 function PostAction({ postId, isOpen, handleClose }) {
-  console.log(postId)
   const { data: response } = useQuery('posts', () => getOnePost({ postId }))
   const post = response?.data || { title: '', content: '', access: 'All' }
 
