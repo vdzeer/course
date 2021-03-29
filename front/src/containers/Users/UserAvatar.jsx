@@ -5,7 +5,6 @@ function UserAvatar({ routes }) {
   const userId = routes.match.params.id
   const { data: response } = useQuery('avatar', () => getUserAvatar({ userId }))
   const avatar = response?.data || null
-
   return (
     <div style={{ textAlign: 'center' }}>
       {avatar && <img src={`/uploads/${avatar}`} alt='user avatar' />}

@@ -1,5 +1,4 @@
 import Article from './Article/Article'
-import { Link } from 'react-router-dom'
 import './PostsList.css'
 
 function PostsList({ posts, isFetching }) {
@@ -9,7 +8,13 @@ function PostsList({ posts, isFetching }) {
       {!isFetching && (
         <div className='article-block'>
           {posts.map((el, index) => (
-            <Article id={el.id} title={el.title} text={el.content} />
+            <Article
+              id={el.id}
+              title={el.title}
+              text={el.content}
+              image={el.image}
+              key={index}
+            />
           ))}
         </div>
       )}
