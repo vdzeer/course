@@ -1,3 +1,7 @@
+import { useState } from 'react'
+import Button from '@material-ui/core/Button'
+import Cropper from 'react-cropper'
+import 'cropperjs/dist/cropper.css'
 import { Formik, Field, Form } from 'formik'
 import * as Yup from 'yup'
 import './EditArticle.css'
@@ -7,6 +11,10 @@ import DialogTitle from '@material-ui/core/DialogTitle'
 import DialogContent from '@material-ui/core/DialogContent'
 
 function EditArticle({ post, onSubmit, edit, isOpen, handleClose }) {
+  const [image, setImage] = useState()
+  const [cropper, setCropper] = useState()
+  const [croppedImage, setCroppedImage] = useState()
+
   const postSchema = Yup.object().shape({
     title: Yup.string()
       .min(1, 'Too Short!')
@@ -23,9 +31,34 @@ function EditArticle({ post, onSubmit, edit, isOpen, handleClose }) {
 
   const history = useHistory()
 
+  const validateImage = (file) => {
+    return (
+      file.size < 10000000 &&
+      ['image/png', 'image/jpg', 'image/jpeg'].includes(file.type)
+    )
+  }
+
   const handleSubmit = (data) => {
-    onSubmit(data)
+    onSubmit({ ...data, image: croppedImage })
     history.push('/')
+  }
+
+  const handleChange = (e) => {
+    e.preventDefault()
+
+    const reader = new FileReader()
+    if (validateImage(e.target.files[0])) {
+      reader.onload = () => {
+        setImage(reader.result)
+      }
+      reader.readAsDataURL(e.target.files[0])
+    }
+  }
+
+  const cropImage = () => {
+    if (cropper) {
+      setCroppedImage(cropper.getCroppedCanvas().toDataURL())
+    }
   }
 
   return (
@@ -91,6 +124,31 @@ function EditArticle({ post, onSubmit, edit, isOpen, handleClose }) {
                   ) : null}
                 </div>
 
+                <h2 className='main__title'>Change image:</h2>
+                {!croppedImage && (
+                  <Button variant='contained' component='label'>
+                    Upload new image
+                    <input
+                      onChange={handleChange}
+                      hidden
+                      type='file'
+                      name='avatar'
+                    />
+                  </Button>
+                )}
+                {image && !croppedImage && (
+                  <Cropper
+                    src={image}
+                    initialAspectRatio={3 / 3}
+                    onInitialized={(instance) => setCropper(instance)}
+                  />
+                )}
+                {image && !croppedImage && (
+                  <button type='submit' variant='contained' onClick={cropImage}>
+                    Crop image!
+                  </button>
+                )}
+                {croppedImage && <img src={croppedImage} alt='cropped' />}
                 <button type='submit'>Submit</button>
               </Form>
             )}

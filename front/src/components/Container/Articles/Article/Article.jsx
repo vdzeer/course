@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import ArticleEditBtn from './ArticleEditBtn'
 import { Link } from 'react-router-dom'
 
-function Article({ id, title, text }) {
+function Article({ id, title, text, image }) {
   return (
     <>
       <div className='article'>
@@ -15,6 +15,7 @@ function Article({ id, title, text }) {
             <h2 className='article__title'>{title}</h2>
           </Link>
         }
+        {image && <img src={`/uploads/${image}`} alt='post' />}
         <span className='article__text'>{text}</span>
         <br />
         {<ArticleEditBtn id={id} />}
